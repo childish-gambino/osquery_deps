@@ -117,12 +117,12 @@ choco install -y curl
 Write-Output "Checking host on Fleet Server..."
 
 $request = osqueryi --json "SELECT uuid FROM system_info" | jq -r ".[].uuid"
-Write-Output "uuid on local: \n $request"
+Write-Output "uuid on local: `n $request"
 
 Remove-Item alias:curl
 
 $response = curl -sS -k -X GET "https://osquery.grofers.network/api/v1/kolide/hosts" -H "authorization: Bearer $token" | jq -r --arg request \`"$request\`" ".[] | map(select(.uuid | contains(\`"$request\`")))|.[].uuid"
-Write-Output "uuid on remote: \n $response"
+Write-Output "uuid on remote: `n $response"
 
 
 # json=sudo osqueryi --json "SELECT uuid, hostname, computer_name, hardware_serial  FROM system_info"|awk '/{([^}]*})/ {print $0}'|sed 's/^ *//g'
@@ -134,7 +134,7 @@ Write-Output "Logging rollout progress..."
 
 $json = osqueryi --json "SELECT uuid, hostname, computer_name, hardware_serial  FROM system_info" | jq --arg email \`"$email\`" ".[] |. + {\`"email\`": \`"$email\`", \`"status\`": \`"err\`"}"
 
-Write-Output "DEBUG: Default JSON body \n $json"
+Write-Output "DEBUG: Default JSON body `n $json"
 
 $jdata = @{
     uuid            = $json | jq -r ".uuid"
@@ -162,7 +162,7 @@ if ( $request -eq $response ) {
 }
 else {
     Write-Output "There was problem with enrolling this host"
-    Write-Output "Local uuid:\n $request is not equal to \n $response"
+    Write-Output "Local uuid:`n $request is not equal to `n $response"
     $json = write-output $json | jq ". + {\`"uuid\`": \`"\`"}"
     Invoke-RestMethod -Uri $uri -Method Post -Body ($jdata | ConvertTo-Json) -ContentType "application/json"
 
