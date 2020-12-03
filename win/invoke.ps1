@@ -164,6 +164,7 @@ else {
     Write-Output "There was problem with enrolling this host"
     Write-Output "Local uuid:\n $request is not equal to \n $response"
     $json = write-output $json | jq ". + {\`"uuid\`": \`"\`"}"
+    Invoke-RestMethod -Uri $uri -Method Post -Body ($jdata | ConvertTo-Json) -ContentType "application/json"
 
-    curl -X POST -H 'Content-Type: application/json' -d "$json" https://certitude.grofers.network/api/
+    # curl -X POST -H "Content-Type: application/json" -d "$json" https://certitude.grofers.network/api/
 }
