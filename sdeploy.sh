@@ -60,9 +60,6 @@ echo "Checking host on Fleet Server..."
 request=$(sudo osqueryi --json "SELECT uuid FROM system_info" | jq -r '.[].uuid')
 echo "uuid on local: \n $request"
 
-echo "${1}"
-echo "${2}"
-
 # Remove curl alias on windows.
 # Remove-Item alias:curl
 
