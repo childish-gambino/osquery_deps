@@ -1,0 +1,9 @@
+#!/bin/bash
+# Unload and remove com.facebook.osquery.plist launchdaemon
+sudo launchctl unload /Library/LaunchDaemons/com.facebook.osqueryd.plist
+sudo rm /Library/LaunchDaemons/com.facebook.osqueryd.plist
+
+# Remove files/directories created by osquery installer pkg
+sudo rm -rf /private/var/log/osquery
+sudo rm -rf /private/var/osquery
+sudo rm /usr/local/bin/osquery*

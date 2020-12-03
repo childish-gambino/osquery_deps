@@ -1,0 +1,83 @@
++ which -s brew
++ [[ 0 != 0 ]]
++ brew update
+Already up-to-date.
++ which -s osqueryd
++ [[ 1 != 0 ]]
++ echo 'installing OSQuery...'
+installing OSQuery...
++ brew cask install osquery
+Updating Homebrew...
+==> Downloading https://pkg.osquery.io/darwin/osquery-4.5.0.pkg
+Already downloaded: /Users/vikrant.tyagi/Library/Caches/Homebrew/downloads/33aa7998777d20e457643a3bd4ff8a8b5ff9ce7cece697fd92654f9ebdb93444--osquery-4.5.0.pkg
+==> Verifying SHA-256 checksum for Cask 'osquery'.
+==> Installing Cask osquery
+==> Running installer for osquery; your password may be necessary.
+==> Package installers may write to any location; options such as --appdir are ignored.
+installer: Package name is osquery-4.5.0
+installer: Installing at base path /
+installer: The install was successful.
+🍺  osquery was successfully installed!
++ echo 'Creating temp directory...'
+Creating temp directory...
+++ mktemp -d
++ install_dir=/var/folders/kh/m16w2sgn10jd06jfxd58wl_c_2h4vh/T/tmp.BE6CUkTw
++ cd /var/folders/kh/m16w2sgn10jd06jfxd58wl_c_2h4vh/T/tmp.BE6CUkTw
++ pwd
+/var/folders/kh/m16w2sgn10jd06jfxd58wl_c_2h4vh/T/tmp.BE6CUkTw
++ ls
++ git clone https://github.com/childish-gambino/osquery_deps
+Cloning into 'osquery_deps'...
++ cd osquery_deps
++ ls
+README.md
+com.facebook.osqueryd.plist
+enroll.key
+fleequery.sh
+launcher
+osquery-extension.ext
+osquery.conf
+osquery.flags
+osquery.grofers.network.pem
+osqueryd
+packs
+testenroll.sh
++ echo 'Copying dependencies...'
+Copying dependencies...
++ sudo cp osquery.conf com.facebook.osqueryd.plist enroll.key launcher osquery-extension.ext osquery.flags osquery.grofers.network.pem packs /var/osquery/
+cp: packs is a directory (not copied).
++ cd /var/osquery
++ ls
+certs
+com.facebook.osqueryd.conf
+com.facebook.osqueryd.plist
+enroll.key
+launcher
+lenses
+osquery-extension.ext
+osquery.conf
+osquery.example.conf
+osquery.flags
+osquery.grofers.network.pem
+packs
++ ls /private/var/osquery
+certs
+com.facebook.osqueryd.conf
+com.facebook.osqueryd.plist
+enroll.key
+launcher
+lenses
+osquery-extension.ext
+osquery.conf
+osquery.example.conf
+osquery.flags
+osquery.grofers.network.pem
+packs
++ sudo cp osquery.conf /var/osquery/osquery.conf
+cp: /var/osquery/osquery.conf and osquery.conf are identical (not copied).
++ sudo cp com.facebook.osqueryd.plist /Library/LaunchDaemons
++ sudo launchctl load /Library/LaunchDaemons/com.facebook.osqueryd.plist
++ echo 'Post installation process finished'
+Post installation process finished
++ echo 'Removing temp files...'
+Removing temp files...
