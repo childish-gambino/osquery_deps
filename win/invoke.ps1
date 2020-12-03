@@ -19,10 +19,13 @@ if ((Test-Admin) -eq $false) {
 
 'running with full privileges'
 
-$token = Read-Host -Prompt 'Please enter your security token:'
+Write-Output '############ HELLO FELLO NERD ############ `n `n'
+$token = Read-Host -Prompt 'Please enter your security token'
 Write-Output $email
 
-$email = Read-Host -Prompt 'Please enter your Grofers/HOT email ID:'
+Write-Output '`n'
+
+$email = Read-Host -Prompt 'Please enter your Grofers/HOT email ID'
 Write-Output $email
 # $hostname=$email.split("@")[0]
 Set-PSDebug -Trace 1
