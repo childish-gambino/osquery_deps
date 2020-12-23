@@ -34,16 +34,19 @@ switch ($domain) {
     "grofers.com" {
         $hostname = $email.replace("@grofers.com", "-gipl")
         $hostname = $hostname.replace(".", "-")
+        Write-Output "hostname will be set to: $hostname"
+
         break
     }
 
     "handsontrades.com" {
         $hostname = $email.replace("@handsontrades.com", "-hot")
         $hostname = $hostname.replace(".", "-")
+        Write-Output "hostname will be set to: $hostname"
         break
     }
 }
-Write-Output $hostname
+
 # $srn = (wmic bios get serialnumber | findstr /I /V "SerialNumber" | out-string).trim()
 # $hostname += "-" + $srn
 # Write-Output $hostname
