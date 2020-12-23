@@ -43,8 +43,11 @@ switch ($domain) {
         break
     }
 }
-$srn += wmic bios get serialnumber | findstr /I /V "SerialNumber"
-$hostname = $hostname + "-" + $srn
+Write-Output $hostname
+# $srn = (wmic bios get serialnumber | findstr /I /V "SerialNumber" | out-string).trim()
+# $hostname += "-" + $srn
+# Write-Output $hostname
+
 rename-computer -newname "$hostname" -force
 
 if (test-path "C:\ProgramData\chocolatey\choco.exe") {
