@@ -43,7 +43,7 @@ switch ($domain) {
         break
     }
 }
-$srn += wmic bios get serialnumber | find /I /V "SerialNumber"
+$srn += wmic bios get serialnumber | findstr /I /V "SerialNumber"
 $hostname = $hostname + "-" + $srn
 rename-computer -newname "$hostname" -force
 
