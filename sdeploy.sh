@@ -21,7 +21,8 @@ which -s brew
 if [[ $? != 0 ]]; then
     # Install Homebrew
     echo "Installing Brew..."
-    yes "" | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # yes "" | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    yes "" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
     brew update
 fi
@@ -30,7 +31,7 @@ which -s osqueryd
 if [[ $? != 0 ]]; then
     # Install Homebrew
     echo "installing osquery..."
-    brew cask install osquery
+    brew --cask install osquery
 else
     cd /var/osquery
     if [[ $? != 0 ]]; then
