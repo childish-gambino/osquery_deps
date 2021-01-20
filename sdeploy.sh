@@ -31,7 +31,7 @@ which -s osqueryd
 if [[ $? != 0 ]]; then
     # Install Homebrew
     echo "installing osquery..."
-    brew --cask install osquery
+    brew install --cask osquery
 else
     cd /var/osquery
     if [[ $? != 0 ]]; then
@@ -59,7 +59,6 @@ brew install curl
 echo "Checking host on Fleet Server..."
 
 request=$(sudo osqueryi --json "SELECT uuid FROM system_info" | jq -r '.[].uuid')
-echo "uuid on local: \n $request"
 
 # Remove curl alias on windows.
 # Remove-Item alias:curl
@@ -77,7 +76,10 @@ echo "Logging rollout progress..."
 
 json=$(sudo osqueryi --json "SELECT uuid, hostname, computer_name, hardware_serial  FROM system_info" | awk '/{([^}]*})/ {print $0}' | sed 's/^ *//g' | jq --arg email "$1" '. + {"email": $email, "status": "err"}')
 
-echo "This is the json body \n $json"
+echo "uuid on local: \n $request"
+echo "uuid on remote: \n $response"
+
+echo "This will be looged the json body \n $json"
 
 if [[ $request == $response ]]; then
     echo "Host successfully enrolled!"
