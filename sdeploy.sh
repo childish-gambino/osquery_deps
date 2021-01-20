@@ -79,7 +79,7 @@ json=$(sudo osqueryi --json "SELECT uuid, hostname, computer_name, hardware_seri
 echo "uuid on local: \n $request"
 echo "uuid on remote: \n $response"
 
-echo "This will be looged the json body \n $json"
+echo "This is the json body \n $json"
 
 if [[ $request == $response ]]; then
     echo "Host successfully enrolled!"
